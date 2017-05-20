@@ -17,7 +17,7 @@ function createError(errorMessage) {
 function getUsageHelp(commandName) {
     var text = 'Expected usage: \n' +
         commandName + ' *help* -- Displays help message.\n' +
-        commandName + ' [text here]';
+        commandName + ' *[text here]*';
     return text;
 }
 
@@ -25,7 +25,7 @@ function getFullHelp(commandName) {
     var text =
         'Allows you to send anonymous messages to specified channels.\n' +
         'The most convenient and safe way is to open up a conversation with Slackbot and type the commands there, so that nobody detects that you are typing and you don\'t accidentally reveal yourself by typing an invalid command.\n' +
-        'Messages and authors are not stored; the sources are available at <https://github.com/TargetProcess/slack-anonymous>.\n' +
+        'Messages and authors are not stored; sources are available at <https://github.com/Randomqwerty/abcd>.\n' +
         '\n' +
         getUsageHelp(commandName);
 
