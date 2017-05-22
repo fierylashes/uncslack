@@ -17,7 +17,7 @@ function createError(errorMessage) {
 function getUsageHelp(commandName) {
     var text = 'Expected usage: \n' +
         commandName + ' *help* -- Displays help message.\n' +
-        commandName + ' *[text here]*';
+        commandName + ' *[cummies here]*';
     return text;
 }
 
@@ -43,11 +43,8 @@ function createResponsePayload(requestBody) {
     if (!text || text === 'help') {
         return createError(getFullHelp(command));
     }
-
-    var remainingText = 'Someone said "' + text + '"';
-
     return {
-        text: remainingText
+        text: text
     };
 }
 
