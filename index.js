@@ -43,8 +43,11 @@ function createResponsePayload(requestBody) {
     if (!text || text === 'help') {
         return createError(getFullHelp(command));
     }
+
+    var remainingText = 'Someone said "' + text + '"';
+
     return {
-        text: text
+        text: remainingText
     };
 }
 
