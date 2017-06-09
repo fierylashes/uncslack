@@ -53,7 +53,7 @@ function createResponsePayload(requestBody) {
 
 app.post('/', function(req, response) {
     var payloadOption = createResponsePayload(req.body);
-	var messages = ["Message delivered! :pepepls:", "Cummies delivered! :sweat_drops:", "Coochies successfully gooched! :gucci:", "Dick pics sent to Carol! :carol-folt-thumbs-up:", "Zelda's AI revised! :sweat_smile:", "Privilege Czeched! :flag-cz:", "Another dick slain! You have gained 5 experience points. :eggplant:", "#WeDemandUNC: More bread for Weast :^)", "Where do we stand on the ((Sargon Question))? :pepegun:", "Biscuits successfully tickled :b:", "I wumbo. You wumbo. He- she-me wumbo. Wumbo; Wumboing; We'll have the wumbo; Wumborama; Wumbology; the study of Wumbo. It's first grade, Spongebob! :wumbo:", "Goop successfully shlurped!"],
+	var messages = ["Message delivered! :pepepls:", "Cummies delivered! :sweat_drops:", "Coochies successfully gooched! :gucci:", "Dick pics sent to Carol! :carol-folt-thumbs-up:", "Zelda's AI revised! :sweat_smile:", "Privilege Czeched! :flag-cz:", "Another dick slain! You have gained 5 experience points. :eggplant:", "#WeDemandUNC: More bread for Weast :^)", "Where do we stand on the ((Sargon Question))? :pepegun:", ":b:iscuits successfully tickled!", "I wumbo. You wumbo. He- she-me wumbo. Wumbo; Wumboing; We'll have the wumbo; Wumborama; Wumbology; the study of Wumbo. It's first grade, Spongebob! :wumbo:", "Goop successfully shlurped! :tongue:"],
     message = messages[Math.floor(Math.random() * messages.length)];
     if (payloadOption.error) {
         response.end(payloadOption.error);
