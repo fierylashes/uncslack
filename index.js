@@ -23,9 +23,9 @@ function getUsageHelp(commandName) {
 
 function getFullHelp(commandName) {
     var text =
-        'Allows you to send anonymous messages to specified channels.\n' +
+        'Lets you send anonymous messages to specific channels.\n' +
         'The most convenient and safe way is to open up a conversation with Slackbot and type the commands there, so that nobody detects that you are typing and you don\'t accidentally reveal yourself by typing an invalid command.\n' +
-        'Messages and authors are not stored; sources are available at <https://github.com/Randomqwerty/uncslack>.\n' +
+        'Messages and authors are not stored; source for UNC Slack is available at <https://github.com/Randomqwerty/uncslack>.\n' +
         '\n' +
         getUsageHelp(commandName);
 
@@ -53,6 +53,8 @@ function createResponsePayload(requestBody) {
 
 app.post('/', function(req, response) {
     var payloadOption = createResponsePayload(req.body);
+	var messages = ["Message delivered! :pepepls:", "Cummies delivered! :sweat_drops:", "Coochies successfully gooched! :gucci:", "Dick pics sent to Carol! :carol-folt-thumbs-up:", "Zelda's AI revised! :sweat_smile:", "Privilege Czeched! :flag-cz:", "Another dick slain! You have gained 5 experience points. :eggplant:", "#WeDemandUNC: More bread for Weast :^)", "Where do we stand on the ((Sargon Question))? :pepegun:", "Biscuits successfully tickled :b:", "I wumbo. You wumbo. He- she-me wumbo. Wumbo; Wumboing; We'll have the wumbo; Wumborama; Wumbology; the study of Wumbo. It's first grade, Spongebob! :wumbo:", "Goop successfully shlurped!"],
+    message = messages[Math.floor(Math.random() * messages.length)];
     if (payloadOption.error) {
         response.end(payloadOption.error);
         return;
@@ -65,7 +67,7 @@ app.post('/', function(req, response) {
         if(error) {
             response.end('Unable to post your message: ' + JSON.stringify(error));
         } else {
-            response.end('Delivered! :pepe:');
+            response.end(message);
         }
 
     });
