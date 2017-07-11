@@ -17,14 +17,14 @@ function createError(errorMessage) {
 function getUsageHelp(commandName) {
     var text = 'Expected usage: \n' +
         commandName + ' *help* -- Displays help message.\n' +
-        commandName + ' *[cummies here]*';
+        commandName + ' *[post your cummies here]*';
     return text;
 }
 
 function getFullHelp(commandName) {
     var text =
         'Lets you send anonymous messages to specific channels.\n' +
-        'The most convenient and safe way is to open up a conversation with Slackbot and type the commands there, so that nobody detects that you are typing and you don\'t accidentally reveal yourself by typing an invalid command.\n' +
+        'The safest way type the commands in a chat with Slackbot, so that nobody detects that you are typing.\n' +
         'Messages and authors are not stored; source for UNC Slack is available at <https://github.com/Randomqwerty/uncslack>.\n' +
         '\n' +
         getUsageHelp(commandName);
@@ -37,30 +37,60 @@ function createResponsePayload(requestBody) {
         return createError('Request is empty');
     }
 
-    var text = requestBody.text;
-    var command = requestBody.command;
+    var txt = requestBody.text;
+    var commandName = requestBody.command;
+	var target = commandName.slice(5);
+	var colors = ["Red ", "Orange ", "Yellow ", "Green ", "Blue ", "Purple ", "Pink ", "Grey ", "Black "];
+	var icons = ["Anchor ", "Flashlight ", "Shovel ", "Socks ", "Boot ", "Acorn ", " Paw ", "Mushroom ", "Oars ", "Tent "];
 
-    if (!text || text === 'help') {
-        return createError(getFullHelp(command));
+	if (!txt || txt === 'help') {
+        return createError(getFullHelp(commandName));
     }
-
-    var remainingText = 'Someone said "' + text + '"';
+	
+    var remainingText = colors[Math.floor(Math.random() * colors.length)] + icons[Math.floor(Math.random() * icons.length)] + 'said "' + txt + '"';
 
     return {
         text: remainingText
     };
 }
 
+function getChannel(requestBody) {
+   var commandName = requestBody.command;
+   var target = commandName.slice(5);
+   var channel = "a";
+	if (target == 'general') {
+		channel = process.env.GENERAL;
+		} 
+	else if (target === 'random') {
+		channel = process.env.RAND;
+		} 
+	else if (target === 'cuck') {
+		channel = process.env.CUCK;
+		} 
+	else if (target === 'nsfw') {
+		channel = process.env.NSFW;
+		} 
+	else if (target === 'advice') {
+		channel = process.env.ADVICE;
+		} 
+	else {
+		channel = process.env.ANIMU;
+		}
+	return channel;
+}
+
 app.post('/', function(req, response) {
     var payloadOption = createResponsePayload(req.body);
-	var messages = ["Message delivered! :pepepls:", "Cummies delivered! :sweat_drops:", "Coochies successfully gooched! :gucci:", "Dick pics sent to Carol! :carol-folt-thumbs-up:", "Revisions made to ZeldaBot's AI: now able to use more reactions! :sweat_smile:", "Privilege Czeched! :flag-cz:", "NPC [Dick] was slain! You have gained 5 experience points. :eggplant:", "#WeDemandUNC: More bread for Weast :^)", "Where do we stand on the ((Sargon Question))? :pepegun:", ":b:iscuits successfully tickled!", "I wumbo. You wumbo. He- she-me wumbo. Wumbo; Wumboing; We'll have the wumbo; Wumborama; Wumbology; the study of Wumbo. It's first grade, Spongebob! :wumbo:", "Goop successfully shlurped! :tongue:"],
+	var messages = ["Message delivered! :pepe:", "Cummies delivered! :sweat_drops:", "Dick pics sent to Carol! :carol-folt-thumbs-up:", "[UPDATE]: Improved ZeldaBot's response time! :sweat_smile:", "NPC [Dick] was slain! You have gained 5 experience points. :eggplant:"];
+	var postchannel = getChannel(req.body);
+	
     message = messages[Math.floor(Math.random() * messages.length)];
     if (payloadOption.error) {
         response.end(payloadOption.error);
         return;
     }
     request({
-        url: process.env.POSTBACK_URL,
+        url: postchannel,
         json: payloadOption,
         method: 'POST'
     }, function (error) {
