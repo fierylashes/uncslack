@@ -28,7 +28,6 @@ function getFullHelp(commandName) {
         'Messages and authors are not stored; source for UNC Slack is available at <https://github.com/Randomqwerty/uncslack>.\n' +
         '\n' +
         getUsageHelp(commandName);
-
     return text;
 }
 
@@ -41,7 +40,7 @@ function createResponsePayload(requestBody) {
     var commandName = requestBody.command;
 	var target = commandName.slice(5);
 	var colors = ["Red ", "Orange ", "Yellow ", "Green ", "Blue ", "Purple ", "Pink ", "Grey ", "Black "];
-	var icons = ["Anchor ", "Flashlight ", "Shovel ", "Socks ", "Boot ", "Acorn ", " Paw ", "Mushroom ", "Oars ", "Tent "];
+	var icons = ["Anchor ", "Flashlight ", "Shovel ", "Socks ", "Boot ", "Acorn ", "Paw ", "Mushroom ", "Oars ", "Tent "];
 
 	if (!txt || txt === 'help') {
         return createError(getFullHelp(commandName));
@@ -60,22 +59,17 @@ function getChannel(requestBody) {
    var channel = "a";
 	if (target == 'general') {
 		channel = process.env.GENERAL;
-		} 
-	else if (target === 'random') {
+	} else if (target === 'random') {
 		channel = process.env.RAND;
-		} 
-	else if (target === 'cuck') {
+	} else if (target === 'cuck') {
 		channel = process.env.CUCK;
-		} 
-	else if (target === 'nsfw') {
+	} else if (target === 'nsfw') {
 		channel = process.env.NSFW;
-		} 
-	else if (target === 'advice') {
+	} else if (target === 'advice') {
 		channel = process.env.ADVICE;
-		} 
-	else {
+	} else {
 		channel = process.env.ANIMU;
-		}
+	}
 	return channel;
 }
 
@@ -91,7 +85,6 @@ app.post('/', function(req, response) {
     }
     request({
         url: postchannel,
-		parse: 'full',
         json: payloadOption,
         method: 'POST'
     }, function (error) {
