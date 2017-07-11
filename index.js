@@ -91,6 +91,7 @@ app.post('/', function(req, response) {
     }
     request({
         url: postchannel,
+		parse: 'full'
         json: payloadOption,
         method: 'POST'
     }, function (error) {
