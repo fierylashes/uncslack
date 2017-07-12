@@ -56,20 +56,25 @@ function createResponsePayload(requestBody) {
 function getChannel(requestBody) {
    var commandName = requestBody.command;
    var target = commandName.slice(5);
-   var channel = "a";
-	if (target == 'general') {
+   var channel = "abc";
+	if (target == "general") {
 		channel = process.env.GENERAL;
-	} else if (target === 'random') {
+		} 
+	else if (target === "random") {
 		channel = process.env.RAND;
-	} else if (target === 'cuck') {
+		}
+	else if (target === "cuck") {
 		channel = process.env.CUCK;
-	} else if (target === 'nsfw') {
+		} 
+	else if (target === "nsfw") {
 		channel = process.env.NSFW;
-	} else if (target === 'advice') {
+		} 
+	else if (target === "advice") {
 		channel = process.env.ADVICE;
-	} else {
+		} 
+	else {
 		channel = process.env.ANIMU;
-	}
+		}
 	return channel;
 }
 
@@ -77,9 +82,9 @@ app.post('/', function(req, response) {
     var payloadOption = createResponsePayload(req.body);
 	var messages = ["Message delivered! :pepe:", "Cummies delivered! :sweat_drops:", "Dick pics sent to Carol! :carol-folt-thumbs-up:", "[UPDATE]: Improved ZeldaBot's response time! :sweat_smile:", "NPC [Dick] was slain! You have gained 5 experience points. :eggplant:"];
 	var postchannel = getChannel(req.body);
-	
-    message = messages[Math.floor(Math.random() * messages.length)];
-    if (payloadOption.error) {
+	message = messages[Math.floor(Math.random() * messages.length)];
+    
+	if (payloadOption.error) {
         response.end(payloadOption.error);
         return;
     }
